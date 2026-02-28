@@ -1,4 +1,4 @@
-# agent-skills
+# master-front-skill
 
 Coleção de skills para agentes de IA (Claude Code, Cursor, Copilot, etc).
 
@@ -6,13 +6,13 @@ Coleção de skills para agentes de IA (Claude Code, Cursor, Copilot, etc).
 
 ```bash
 # Instalar todas as skills deste repo
-npx skills add <SEU_USUARIO>/agent-skills
+npx skills add Witroch4/master-front-skill
 
 # Instalar skill específica
-npx skills add <SEU_USUARIO>/agent-skills@master-front-skill
+npx skills add Witroch4/master-front-skill@master-front-skill
 
 # Instalar globalmente (disponível em todos os projetos)
-npx skills add <SEU_USUARIO>/agent-skills@master-front-skill -g
+npx skills add Witroch4/master-front-skill@master-front-skill -g
 ```
 
 ## Skills Disponíveis
@@ -29,13 +29,13 @@ Master frontend skill consolidando as melhores práticas de:
 - **Animações** — GPU-friendly, Framer Motion, Remotion
 
 ```bash
-npx skills add <SEU_USUARIO>/agent-skills@master-front-skill -g
+npx skills add Witroch4/master-front-skill@master-front-skill -g
 ```
 
 ## Estrutura
 
 ```
-agent-skills/
+master-front-skill/
 └── master-front-skill/
     └── SKILL.md
 ```
