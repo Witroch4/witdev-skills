@@ -6,11 +6,11 @@ Coleção de skills para agentes de IA (Claude Code, Cursor, Copilot, etc).
 
 ```bash
 # Instalar todas as skills deste repo
-npx skills add Witroch4/master-front-skill
+npx skills add Witroch4/witdev-skills
 
 # Instalar skill específica
-npx skills add Witroch4/master-front-skill@master-front-skill -g
-npx skills add Witroch4/master-front-skill@witdev-project-setup -g
+npx skills add Witroch4/witdev-skills@master-front-skill -g
+npx skills add Witroch4/witdev-skills@witdev-project-setup -g
 ```
 
 ## Skills Disponíveis
@@ -27,7 +27,7 @@ Master frontend skill consolidando as melhores práticas de:
 - **Animações** — GPU-friendly, Framer Motion, Remotion
 
 ```bash
-npx skills add Witroch4/master-front-skill@master-front-skill -g
+npx skills add Witroch4/witdev-skills@master-front-skill -g
 ```
 
 ### `witdev-project-setup`
@@ -44,13 +44,13 @@ Setup completo de novo projeto com a stack WitDev padrão:
 - **Conexões Docker** — solução definitiva para "conexão fantasma" TCP/NAT
 
 ```bash
-npx skills add Witroch4/master-front-skill@witdev-project-setup -g
+npx skills add Witroch4/witdev-skills@witdev-project-setup -g
 ```
 
 ## Estrutura
 
 ```
-master-front-skill/
+witdev-skills/
 ├── master-front-skill/
 │   └── SKILL.md
 └── witdev-project-setup/
