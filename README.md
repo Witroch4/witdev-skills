@@ -1,4 +1,4 @@
-# master-front-skill
+# witdev-skills
 
 Coleção de skills para agentes de IA (Claude Code, Cursor, Copilot, etc).
 
@@ -9,10 +9,8 @@ Coleção de skills para agentes de IA (Claude Code, Cursor, Copilot, etc).
 npx skills add Witroch4/master-front-skill
 
 # Instalar skill específica
-npx skills add Witroch4/master-front-skill@master-front-skill
-
-# Instalar globalmente (disponível em todos os projetos)
 npx skills add Witroch4/master-front-skill@master-front-skill -g
+npx skills add Witroch4/master-front-skill@witdev-project-setup -g
 ```
 
 ## Skills Disponíveis
@@ -32,11 +30,30 @@ Master frontend skill consolidando as melhores práticas de:
 npx skills add Witroch4/master-front-skill@master-front-skill -g
 ```
 
+### `witdev-project-setup`
+
+Setup completo de novo projeto com a stack WitDev padrão:
+
+- **PostgreSQL 17 + pgvector** — `pgvector/pgvector:pg17`, extensão inclusa
+- **Redis 8** — `redis:8-alpine`, major pin + patches
+- **Node.js 24 LTS** — `node:24-alpine`
+- **Next.js 16** — Turbopack estável, React 19.2
+- **Prisma + Driver Adapter** — TCP keepalive real (sem heartbeat)
+- **Docker** — docker-compose-dev, Dockerfile.prod multi-stage, Swarm deploy
+- **Scripts** — `dev.sh`, `build.sh`, `scripts/db-prepare.js`
+- **Conexões Docker** — solução definitiva para "conexão fantasma" TCP/NAT
+
+```bash
+npx skills add Witroch4/master-front-skill@witdev-project-setup -g
+```
+
 ## Estrutura
 
 ```
 master-front-skill/
-└── master-front-skill/
+├── master-front-skill/
+│   └── SKILL.md
+└── witdev-project-setup/
     └── SKILL.md
 ```
 
