@@ -5,56 +5,86 @@ Coleção de skills para agentes de IA (Claude Code, Cursor, Copilot, etc).
 ## Instalação
 
 ```bash
-# Instalar todas as skills deste repo
-npx skills add Witroch4/witdev-skills
-
 # Instalar skill específica
-npx skills add Witroch4/witdev-skills@master-front-skill -g
+npx skills add Witroch4/witdev-skills@<skill-name> -g
+
+# Exemplos
 npx skills add Witroch4/witdev-skills@witdev-project-setup -g
+npx skills add Witroch4/witdev-skills@master-front-skill -g
 ```
 
 ## Skills Disponíveis
 
-### `master-front-skill`
+### WitDev
 
-Master frontend skill consolidando as melhores práticas de:
+| Skill | Descrição |
+|-------|-----------|
+| `witdev-project-setup` | Setup completo: PostgreSQL 17/pgvector, Redis 8, Node.js 24, Next.js 16, Docker, Prisma, BullMQ. Inclui solução para "conexão fantasma" TCP/NAT em Docker. |
+| `master-front-skill` | Frontend master: Tailwind v4, shadcn/ui, design system, performance React/Next.js, acessibilidade, animações. |
 
-- **Tailwind v4** — arquitetura 4-passos, `@theme inline`, dark mode canônico, armadilhas
-- **shadcn/ui** — `cn()`, CVA, composição, extensão correta de componentes
-- **Design System** — filosofia anti "AI slop", tipografia, cor, motion, composição espacial
-- **Performance React/Next.js** — eliminação de waterfalls, bundle, re-renders, SWR
-- **Acessibilidade** — WCAG, keyboard navigation, ARIA, padrões UX
-- **Animações** — GPU-friendly, Framer Motion, Remotion
+### Frontend & UI
 
-```bash
-npx skills add Witroch4/witdev-skills@master-front-skill -g
-```
+| Skill | Descrição |
+|-------|-----------|
+| `frontend-design` | Interfaces production-grade com alto nível de design. |
+| `tailwind-theme-builder` | Setup Tailwind v4 + shadcn/ui com `@theme inline`, dark mode, migração v3→v4. |
+| `shadcn-ui` | Integração e uso avançado de shadcn/ui. |
+| `web-design-guidelines` | Auditoria de UI/UX, acessibilidade WCAG, boas práticas de design web. |
+| `design-md` | Analisa projetos e sintetiza design system em DESIGN.md. |
 
-### `witdev-project-setup`
+### React & Next.js
 
-Setup completo de novo projeto com a stack WitDev padrão:
+| Skill | Descrição |
+|-------|-----------|
+| `vercel-react-best-practices` | Guidelines de performance React/Next.js do Vercel Engineering. |
+| `swr` | SWR para data fetching, caching, revalidação e optimistic updates. |
 
-- **PostgreSQL 17 + pgvector** — `pgvector/pgvector:pg17`, extensão inclusa
-- **Redis 8** — `redis:8-alpine`, major pin + patches
-- **Node.js 24 LTS** — `node:24-alpine`
-- **Next.js 16** — Turbopack estável, React 19.2
-- **Prisma + Driver Adapter** — TCP keepalive real (sem heartbeat)
-- **Docker** — docker-compose-dev, Dockerfile.prod multi-stage, Swarm deploy
-- **Scripts** — `dev.sh`, `build.sh`, `scripts/db-prepare.js`
-- **Conexões Docker** — solução definitiva para "conexão fantasma" TCP/NAT
+### IA & APIs
 
-```bash
-npx skills add Witroch4/witdev-skills@witdev-project-setup -g
-```
+| Skill | Descrição |
+|-------|-----------|
+| `gemini-api-dev` | Aplicações com Gemini API: multimodal, function calling, structured outputs. |
+
+### DevOps & Infra
+
+| Skill | Descrição |
+|-------|-----------|
+| `docker-expert` | Docker multi-stage builds, otimização de imagens, segurança, Compose, deploy em produção. |
+
+### Mobile
+
+| Skill | Descrição |
+|-------|-----------|
+| `vercel-react-native-skills` | React Native e Expo: performance, animações, módulos nativos. |
+
+### Outros
+
+| Skill | Descrição |
+|-------|-----------|
+| `python-performance-optimization` | Profiling e otimização de código Python com cProfile e memory profilers. |
+| `remotion-best-practices` | Criação de vídeos com Remotion (React). |
+| `skill-creator` | Criar, modificar e avaliar skills de agentes. |
+| `find-skills` | Descobrir e instalar skills do ecossistema open agent skills. |
 
 ## Estrutura
 
 ```
 witdev-skills/
+├── witdev-project-setup/
 ├── master-front-skill/
-│   └── SKILL.md
-└── witdev-project-setup/
-    └── SKILL.md
+├── frontend-design/
+├── tailwind-theme-builder/
+├── shadcn-ui/
+├── web-design-guidelines/
+├── design-md/
+├── vercel-react-best-practices/
+├── swr/
+├── gemini-api-dev/
+├── docker-expert/
+├── python-performance-optimization/
+├── remotion-best-practices/
+├── skill-creator/
+└── find-skills/
 ```
 
 ## Contribuir
