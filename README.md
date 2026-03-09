@@ -50,6 +50,7 @@ npx skills add Witroch4/witdev-skills@master-front-skill -g
 | Skill | Descrição |
 |-------|-----------|
 | `docker-expert` | Docker multi-stage builds, otimização de imagens, segurança, Compose, deploy em produção. |
+| `chatwit-upstream-sync` | Merge seguro de atualizações upstream do Chatwoot no fork Chatwit, preservando customizações (SocialWise, JusMonitorIA, rich messages, branding). |
 
 ### Mobile
 
@@ -84,7 +85,8 @@ witdev-skills/
 ├── python-performance-optimization/
 ├── remotion-best-practices/
 ├── skill-creator/
-└── find-skills/
+├── find-skills/
+└── chatwit-upstream-sync/
 ```
 
 ## Contribuir
