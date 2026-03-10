@@ -6,7 +6,7 @@ risk: high
 source: witdev
 date_added: "2026-03-09"
 date_updated: "2026-03-10"
-version: "2.0"
+version: "2.1"
 ---
 
 # Chatwit Upstream Sync v2
@@ -35,6 +35,7 @@ Chatwit is a fork of Chatwoot with custom integrations (SocialWise, JusMonitorIA
 8. **If unsure about a conflict, ask the user** — it's better to pause than to lose code.
 9. **After merging, verify no conflict markers remain** — `grep -rn "<<<<<<" . --include="*.rb" --include="*.vue" --include="*.yml"`
 10. **ALWAYS push at the end** — the service must be complete: backup, sync, verify, push. Deliver the house clean and locked.
+11. **ALWAYS update `AGENTS.md` after any sync** — record the new Chatwoot version, new merge-base, and any important code changes that affect migration safety (renamed files, changed APIs, new protected areas, branch strategy changes). This keeps the historical migration table accurate and prevents future syncs from breaking silently.
 
 ## Protected Customization Areas
 
@@ -442,6 +443,22 @@ Present a clear summary:
 - [x] Redis keys
 - [x] Config & docs
 ```
+
+---
+
+### Phase 10: Update AGENTS.md
+
+Append a one-block entry to the `## Histórico de Migração` section in `AGENTS.md`:
+
+```markdown
+### YYYY-MM-DD — Upstream sync vX.Y.Z (N commits)
+- Sync type: Normal merge / Recovery
+- New merge-base: <git merge-base HEAD upstream/develop | cut -c1-8>
+- Conflicts: <N> resolved
+- Critical: <anything future syncs must know — renamed file, moved method, new protected area>
+```
+
+Only also update the **Arquivos críticos** or **Componentes SocialWise** tables if a protected path actually changed.
 
 ---
 
