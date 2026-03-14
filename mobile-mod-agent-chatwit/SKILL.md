@@ -1,22 +1,32 @@
 ---
 name: mobile-mod-agent-chatwit
 description: Chatwit mobile PWA module — build, fix, or extend mobile UI under components-next/mobile/ with strict desktop isolation. Trigger on: mobile mode, PWA, mobile UI, swipe gestures, mobile conversation actions, mobile settings, push notifications, mobile layout, small-screen features.
-category: chatwit
-source: witdev
-date_added: "2026-03-14"
+metadata:
+	category: chatwit
+	source: witdev
+	date_added: "2026-03-14"
 ---
 
 # Mobile Mod Agent Chatwit
 
 This skill is for mobile work in the Chatwit fork only. The mobile module is a dedicated visual layer for small screens (`width < 768px`) that must stay **completely isolated** from desktop behavior.
 
+## Mandatory first action
+
+Before doing anything else for any request that triggers this skill, read the **first 100 lines** of `chatwitdocs/Chatwoot-Chatwit-mobile.md`.
+
+- This is mandatory even if the user asks for a tiny change, bug fix, review, or question
+- Do this before reading any other file, proposing a solution, or editing code
+- The goal is to force the latest fork-identity and mobile-isolation rules into context at the start of every run
+
 ## First read
 
 Before proposing or editing code, read in this order:
 
-1. `chatwitdocs/Chatwoot-Chatwit-mobile.md` — the official mobile module doc (isolation rules, architecture, changelog)
-2. `references/chatwit-mobile-architecture.md` bundled with this skill — store action map, existing components, production constraints
-3. `chatwitdocs/chatwoot-mobile-app/` — layout and interaction reference only (React Native source, never port logic from here)
+1. The **first 100 lines** of `chatwitdocs/Chatwoot-Chatwit-mobile.md` — mandatory for every run, independent of the request
+2. Continue reading `chatwitdocs/Chatwoot-Chatwit-mobile.md` as needed — the official mobile module doc (isolation rules, architecture, changelog)
+3. `references/chatwit-mobile-architecture.md` bundled with this skill — store action map, existing components, production constraints
+4. `chatwitdocs/chatwoot-mobile-app/` — layout and interaction reference only (React Native source, never port logic from here)
 
 ## Core rules
 
@@ -56,7 +66,7 @@ The React Native app in `chatwitdocs/chatwoot-mobile-app/` is a reference for la
 
 ### Step 1. Rebuild context
 
-Read the docs listed in "First read" above, then inspect the target mobile component and its desktop counterpart.
+Start by reading the **first 100 lines** of `chatwitdocs/Chatwoot-Chatwit-mobile.md`, even if the task looks unrelated or trivial. Only after that, continue with the rest of the docs listed in "First read" above and inspect the target mobile component and its desktop counterpart.
 
 For conversation work, inspect:
 - `components-next/mobile/` (existing mobile implementation)
