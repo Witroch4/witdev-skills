@@ -1,73 +1,62 @@
-# Chatwit Mobile Architecture Reference
+# Chatwit Mobile — Quick Reference
 
-Use this reference after reading the repo docs. It summarizes the non-negotiable architecture for Chatwit mobile work.
+This file supplements SKILL.md with concrete paths, store mappings, and production constraints. Read this after SKILL.md when you need implementation details.
 
-## Mission
+## Production constraints
 
-Build and maintain the Chatwit mobile web module so it behaves like a native app on small screens while remaining a thin visual layer over existing Chatwit desktop logic.
+- **No Firebase/FCM.** Push notifications use Web Push via VAPID protocol. Keys are auto-generated on first boot and stored in the `InstallationConfig` database table.
+- **No Chatwoot Hub.** `ENABLE_PUSH_RELAY_SERVER=false`. The hub relay is blocked.
+- **No native app.** `IOS_APP_ID` and `ANDROID_BUNDLE_ID` are removed. Chatwit is PWA-only.
+- **Service worker:** `public/sw.js` handles push events and notification clicks.
+- **Push helper:** `app/javascript/dashboard/helper/pushHelper.js` — `requestPushPermissions()`, `registerSubscription()`, `hasPushPermissions()`.
+- **Backend push delivery:** `app/services/notification/push_notification_service.rb` routes to `send_browser_push` (VAPID) for web subscriptions.
 
-## Non-negotiable rules
+## Store action map
 
-### Isolate mobile
+Use this table to find the exact desktop action/getter for any mobile feature. Search the store module file if you need the implementation.
 
-- Mobile is conditional UI for `width < 768px`
-- Desktop must not regress
-- Prefer mobile-only files under `app/javascript/dashboard/components-next/mobile/`
+| Feature | Store module | Key actions | Key getters |
+|---------|-------------|-------------|-------------|
+| Conversation status | `store/modules/conversations/actions.js` | `toggleStatus`, `updateConversation` | `getConversationById` |
+| Assignee | `store/modules/conversations/actions.js` | `assignAgent`, `setCurrentChatAssignee` | `getSelectedChat` |
+| Team | `store/modules/conversations/actions.js` | `assignTeam`, `setCurrentChatTeam` | `getSelectedChat` |
+| Priority | `store/modules/conversations/actions.js` | `assignPriority`, `setCurrentChatPriority` | `getSelectedChat` |
+| Labels | `store/modules/conversationLabels/` | `conversationLabels/get`, `conversationLabels/update` | `conversationLabels/getConversationLabels` |
+| Participants | `store/modules/conversationWatchers.js` | `conversationWatchers/show`, `conversationWatchers/update` | `conversationWatchers/getByConversationId` |
+| Agents list | `store/modules/agents.js` | `agents/get` | `agents/getAgents` |
+| Teams list | `store/modules/teams/` | `teams/get` | `teams/getTeams` |
+| Contact details | `store/modules/contacts/` | `contacts/show` | `contacts/getContact` |
+| Notifications | `store/modules/notifications/` | `notifications/index`, `notifications/read` | `notifications/getNotifications` |
+| Push subscriptions | API client `api/notificationSubscription.js` | `NotificationSubscriptions.create()` | — |
 
-### Connect existing logic
+## Existing mobile components
 
-- Reuse Vuex modules and existing actions
-- Reuse existing conversation request contracts
-- Reuse existing push flow with Web Push + VAPID
-- Reuse desktop data sources for assignee, team, labels, priority, participants, contact details, and conversation status
+These already exist and can be extended or composed:
 
-### Use native app only as a visual guide
+| Component | Purpose |
+|-----------|---------|
+| `MobileLayout.vue` | Root shell with bottom tabs + tab views |
+| `MobileConversationList.vue` | Conversation list with swipe actions |
+| `MobileChatView.vue` | Two-page pager: chat + conversation actions |
+| `MobileConversationActionsView.vue` | Second page: status, assignee, team, priority, labels, participants, attributes |
+| `MobileInboxView.vue` | Notification list with swipe actions |
+| `MobileSettingsView.vue` | Profile, availability, push toggle, logout |
+| `MobileBottomSheet.vue` | Reusable sheet modal |
+| `MobileSwipeableRow.vue` | Reusable swipe-to-reveal wrapper |
+| `MobilePullToRefresh.vue` | Pull-to-refresh gesture wrapper |
 
-Read `chatwitdocs/chatwoot-mobile-app/` to understand:
+## Existing composables
 
-- screen composition
-- swipe/pager behavior
-- action ordering
-- section hierarchy
-- visual rhythm
+| Composable | Purpose |
+|------------|---------|
+| `useHaptics.js` | Vibration API wrapper |
+| `useSwipeBack.js` | Edge-swipe gesture for back navigation |
+| `useKeyboardResize.js` | Virtual keyboard detection and layout adjustment |
 
-Do not port React Native architecture or business logic.
+## i18n structure
 
-## Important project paths
+Mobile strings live in `app/javascript/dashboard/i18n/locale/*/mobile.json` under the `MOBILE` key.
 
-### Docs
+Sections: `TABS`, `INBOX`, `CONVERSATIONS`, `CHAT`, `ACTIONS` (with subsections: `SECTIONS`, `STATUS`, `CTA`, `ASSIGNEE`, `TEAM`, `LABELS`, `PARTICIPANTS`, `ATTRIBUTES`, `PICKERS`, `SEARCH`, `EMPTY`), `SETTINGS`, `FILTER_SHEET`, `STATUS_SHEET`, `SWIPE`, `PUSH`.
 
-- `chatwitdocs/Chatwoot-Chatwit-mobile.md`
-- `chatwitdocs/mobile-fixes.md`
-
-### Mobile implementation
-
-- `app/javascript/dashboard/components-next/mobile/`
-
-### Common desktop logic sources
-
-- `app/javascript/dashboard/routes/dashboard/conversation/`
-- `app/javascript/dashboard/components/widgets/conversation/`
-- `app/javascript/dashboard/store/modules/`
-
-### Entry points
-
-- `app/javascript/dashboard/routes/dashboard/Dashboard.vue`
-- `app/javascript/dashboard/components-next/mobile/MobileLayout.vue`
-
-## Common mobile patterns already used in Chatwit
-
-- bottom tab navigation for inbox, conversations, settings
-- mobile-only sheets for filters and actions
-- route-safe swipe back from the left edge
-- in-conversation swipe pager for chat/details surfaces
-- haptic feedback for gesture thresholds where supported
-
-## Validation mindset
-
-Always check:
-
-- editor errors in changed files
-- mobile locale coverage in `en`, `pt`, `pt_BR`
-- no desktop logic regressions caused by shared component edits
-- docs updated for substantial fixes or new mobile capabilities
+Always add keys to all three locales: `en`, `pt`, `pt_BR`.
