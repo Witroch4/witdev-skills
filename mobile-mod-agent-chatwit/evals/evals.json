@@ -1,0 +1,23 @@
+{
+  "skill_name": "mobile-mod-agent-chatwit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "No mobile do Chatwit, quando eu abrir uma conversa e arrastar da direita para a esquerda, quero abrir uma segunda tela de detalhes igual ao app mobile do Chatwoot, mas sem tocar na lógica desktop. Reaproveite labels, participantes, status, agente, time e prioridade que já existem.",
+      "expected_output": "The agent reads the Chatwit mobile docs first, inspects the desktop/store logic, implements the feature inside mobile-only components, preserves desktop isolation, and updates the mobile docs.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Corrija um bug do módulo mobile do Chatwit onde o settings não mostra corretamente o estado de push notifications no PWA. Não use Firebase nem invente fluxo novo; conecte o que já existe no projeto e mantenha o desktop intacto.",
+      "expected_output": "The agent reuses the existing Web Push/VAPID flow, changes only mobile-specific presentation or guards, adds any missing mobile i18n, and does not introduce desktop regressions.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Quero que a tela mobile de uma conversa mostre detalhes do contato e atributos em um layout mais nativo, usando como referência o chatwitdocs/chatwoot-mobile-app. As informações já existem no desktop, então só conecte ao layout mobile e documente a mudança.",
+      "expected_output": "The agent uses the React Native app only as a layout reference, reuses desktop data sources, keeps the implementation under components-next/mobile, and documents the change in the Chatwit mobile docs.",
+      "files": []
+    }
+  ]
+}

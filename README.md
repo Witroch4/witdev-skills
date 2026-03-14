@@ -57,6 +57,7 @@ npx skills add Witroch4/witdev-skills@master-front-skill -g
 | Skill | Descrição |
 |-------|-----------|
 | `vercel-react-native-skills` | React Native e Expo: performance, animações, módulos nativos. |
+| `mobile-mod-agent-chatwit` | Implementa e evolui o módulo mobile do Chatwit com isolamento total do desktop, reutilizando a lógica existente e usando o app mobile do Chatwoot como referência visual. |
 
 ### Outros
 
@@ -86,7 +87,8 @@ witdev-skills/
 ├── remotion-best-practices/
 ├── skill-creator/
 ├── find-skills/
-└── chatwit-upstream-sync/
+├── chatwit-upstream-sync/
+└── mobile-mod-agent-chatwit/
 ```
 
 ## Contribuir
